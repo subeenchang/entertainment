@@ -106,7 +106,7 @@ export default function Magazine({ json, setJson }: MagazineProps) {
                   }}
                 >
                   <Typography.Text strong>
-                    배너 {field.name + 1}번
+                    매거진 {field.name + 1}번
                   </Typography.Text>
                   <div style={{ display: "flex", gap: 10 }}>
                     <Form.Item
