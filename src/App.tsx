@@ -113,7 +113,7 @@ function App() {
             onClick={() => setType("MAGAZINE")}
             type={type === "MAGAZINE" ? "primary" : "default"}
           >
-            매거진
+            생활제안 매거진
           </Button>
           <Button
             onClick={() => {
