@@ -137,7 +137,7 @@ export default function Magazine({ json, setJson }: MagazineProps) {
                       label="startDate"
                     >
                       <DatePicker
-                        format="YYYY-MM-DD HH:mm:ss"
+                        format="YYYY-MM-DD HH:mm"
                         showTime
                         placeholder="startDate"
                       />
@@ -147,7 +147,7 @@ export default function Magazine({ json, setJson }: MagazineProps) {
                       label="endDate"
                     >
                       <DatePicker
-                        format="YYYY-MM-DD HH:mm:ss"
+                        format="YYYY-MM-DD HH:mm"
                         showTime
                         placeholder="endDate"
                       />

@@ -140,7 +140,7 @@ export default function Banner({ json, setJson }: BannerProps) {
                       label="startDate"
                     >
                       <DatePicker
-                        format="YYYY-MM-DD HH:mm:ss"
+                        format="YYYY-MM-DD HH:mm"
                         showTime
                         placeholder="startDate"
                       />
@@ -150,7 +150,7 @@ export default function Banner({ json, setJson }: BannerProps) {
                       label="endDate"
                     >
                       <DatePicker
-                        format="YYYY-MM-DD HH:mm:ss"
+                        format="YYYY-MM-DD HH:mm"
                         showTime
                         placeholder="endDate"
                       />
