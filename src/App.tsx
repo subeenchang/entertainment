@@ -37,10 +37,10 @@ function App() {
   const [bannerJson, setBannerJson] = useState("");
   const [magazineJson, setMagazineJson] = useState("");
 
-  const saveData = () => {
+  const saveData = (init?: string) => {
     try {
       const localData = JSON.parse(
-        localStorage.getItem("entertainment") ?? "",
+        localStorage.getItem("entertainment") ?? init ?? "",
       ) as {
         popUpState: IPopUpState;
         bannerState: IBannerState;
@@ -74,7 +74,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (popUpJson && bannerJson) {
+    if (popUpJson && bannerJson && magazineJson) {
       const popUpState = JSON.parse(popUpJson);
       const bannerState = JSON.parse(bannerJson);
       const magazineState = JSON.parse(magazineJson);
@@ -135,7 +135,11 @@ function App() {
         )}
         {type === "ALL" && (
           <>
-            <TextArea value={json} style={{ height: 1000 }} />
+            <TextArea
+              value={json}
+              onChange={(e) => saveData(e.target.value)}
+              style={{ height: 1000 }}
+            />
           </>
         )}
       </div>

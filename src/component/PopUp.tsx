@@ -85,7 +85,15 @@ export default function PopUp({ json, setJson }: PopUpProps) {
       <Form form={form}>
         <Form.List name="popUps">
           {(fields, { add, remove }) => (
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+                overflow: "auto",
+                height: "80vh",
+              }}
+            >
               {fields.map((field) => (
                 <div
                   key={field.key}

@@ -91,7 +91,7 @@ export default function Magazine({ json, setJson }: MagazineProps) {
                 flexDirection: "column",
                 gap: 10,
                 overflow: "auto",
-                height: 600,
+                height: "80vh",
               }}
             >
               {fields.map((field) => (

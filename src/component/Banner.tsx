@@ -85,7 +85,15 @@ export default function Banner({ json, setJson }: BannerProps) {
       <Form form={form}>
         <Form.List name="banners">
           {(fields, { add, remove }) => (
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+                overflow: "auto",
+                height: "80vh",
+              }}
+            >
               {fields.map((field) => (
                 <div
                   key={field.key}
