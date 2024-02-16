@@ -26,7 +26,7 @@ export default function PopUp({ json, setJson }: PopUpProps) {
     const { popUps } = form.getFieldsValue();
     setJson(
       JSON.stringify({
-        banners: popUps.map((popUp) => ({
+        popUps: popUps.map((popUp) => ({
           ...popUp,
           conditions: popUp.conditions
             ? {
