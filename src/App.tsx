@@ -1,3 +1,5 @@
+import { Button } from "antd";
+import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import duration from "dayjs/plugin/duration";
@@ -7,16 +9,14 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import relativeTime from "dayjs/plugin/relativeTime";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
-import "./App.css";
-import Banner from "./component/Banner";
-import { useEffect, useState } from "react";
-import { Button, message } from "antd";
-import PopUp from "src/component/PopUp";
+import { useCallback, useEffect, useState } from "react";
 import Magazine from "src/component/Magazine";
-import TextArea from "antd/es/input/TextArea";
-import { IPopUpState } from "src/type/PopUp";
+import PopUp from "src/component/PopUp";
 import { IBannerState } from "src/type/Banner";
 import { IMagazineState } from "src/type/Magazine";
+import { IPopUpState } from "src/type/PopUp";
+import "./App.css";
+import Banner from "./component/Banner";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -37,10 +37,10 @@ function App() {
   const [bannerJson, setBannerJson] = useState("");
   const [magazineJson, setMagazineJson] = useState("");
 
-  const saveData = (init?: string) => {
+  const fetchData = (init?: string) => {
     try {
       const localData = JSON.parse(
-        localStorage.getItem("entertainment") ?? init ?? "",
+        init || (localStorage.getItem("entertainment") ?? ""),
       ) as {
         popUpState: IPopUpState;
         bannerState: IBannerState;
@@ -73,7 +73,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
+  const saveData = useCallback(() => {
     if (popUpJson && bannerJson && magazineJson) {
       const popUpState = JSON.parse(popUpJson);
       const bannerState = JSON.parse(bannerJson);
@@ -85,14 +85,17 @@ function App() {
         magazineState,
       });
       setJson(data);
-      message.info("Local Storage에 저장됨");
       localStorage.setItem("entertainment", data);
     }
   }, [popUpJson, bannerJson, magazineJson]);
 
   useEffect(() => {
+    fetchData(json);
+  }, [json]);
+
+  useEffect(() => {
     saveData();
-  }, []);
+  }, [saveData]);
 
   return (
     <div style={{ margin: 30 }}>
@@ -140,7 +143,7 @@ function App() {
           <>
             <TextArea
               value={json}
-              onChange={(e) => saveData(e.target.value)}
+              onChange={(e) => setJson(e.target.value)}
               style={{ height: 1000 }}
             />
           </>
