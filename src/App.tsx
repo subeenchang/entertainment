@@ -10,7 +10,7 @@ import utc from "dayjs/plugin/utc";
 import "./App.css";
 import Banner from "./component/Banner";
 import { useEffect, useState } from "react";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import PopUp from "src/component/PopUp";
 import Magazine from "src/component/Magazine";
 import TextArea from "antd/es/input/TextArea";
@@ -85,6 +85,7 @@ function App() {
         magazineState,
       });
       setJson(data);
+      message.info("Local Storage에 저장됨");
       localStorage.setItem("entertainment", data);
     }
   }, [popUpJson, bannerJson, magazineJson]);
