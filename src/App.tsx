@@ -97,25 +97,27 @@ function App() {
   return (
     <div style={{ margin: 30 }}>
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-        <div style={{ display: "flex", gap: 10 }}>
-          <Button
-            onClick={() => setType("POPUP")}
-            type={type === "POPUP" ? "primary" : "default"}
-          >
-            팝업
-          </Button>
-          <Button
-            onClick={() => setType("BANNER")}
-            type={type === "BANNER" ? "primary" : "default"}
-          >
-            생활제안 배너
-          </Button>
-          <Button
-            onClick={() => setType("MAGAZINE")}
-            type={type === "MAGAZINE" ? "primary" : "default"}
-          >
-            생활제안 매거진
-          </Button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", gap: 10 }}>
+            <Button
+              onClick={() => setType("POPUP")}
+              type={type === "POPUP" ? "primary" : "default"}
+            >
+              팝업
+            </Button>
+            <Button
+              onClick={() => setType("BANNER")}
+              type={type === "BANNER" ? "primary" : "default"}
+            >
+              생활제안 배너
+            </Button>
+            <Button
+              onClick={() => setType("MAGAZINE")}
+              type={type === "MAGAZINE" ? "primary" : "default"}
+            >
+              생활제안 매거진
+            </Button>
+          </div>
           <Button
             onClick={() => {
               setType("ALL");
