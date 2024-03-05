@@ -65,6 +65,8 @@ export default function Magazine({ json, setJson }: MagazineProps) {
                   magazine.conditions.siteIds.length > 0
                     ? magazine.conditions.siteIds.join(", ")
                     : "",
+                containsFreeApartment:
+                  magazine.conditions.containsFreeApartment ?? true,
                 startDate: dayjs(magazine.conditions.startDate),
                 endDate: dayjs(magazine.conditions.endDate),
                 bybClients: {
@@ -130,6 +132,17 @@ export default function Magazine({ json, setJson }: MagazineProps) {
                     label="siteIds"
                   >
                     <TextArea placeholder="예) EDGE186, EDGE205, EDGE428, EDGE13" />
+                  </Form.Item>
+                  <Form.Item
+                    name={[field.name, "conditions", "containsFreeApartment"]}
+                    label="containsFreeApartment"
+                  >
+                    <Radio.Group
+                      options={[
+                        { value: true, label: "포함" },
+                        { value: false, label: "미포함" },
+                      ]}
+                    />
                   </Form.Item>
                   <div style={{ display: "flex", gap: 10 }}>
                     <Form.Item

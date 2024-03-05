@@ -5,6 +5,11 @@ export interface ICondition {
     */
   siteIds?: string;
   /*
+      미계약 단지 노출 포함/미포함
+      없으면 포함
+    */
+  containsFreeApartment?: boolean;
+  /*
       광고시작 일시 (yyyy-MM-dd HH:mm)
     */
   startDate?: string | null;

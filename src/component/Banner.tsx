@@ -65,6 +65,8 @@ export default function Banner({ json, setJson }: BannerProps) {
                   banner.conditions.siteIds.length > 0
                     ? banner.conditions.siteIds.join(", ")
                     : "",
+                containsFreeApartment:
+                  banner.conditions.containsFreeApartment ?? true,
                 startDate: dayjs(banner.conditions.startDate),
                 endDate: dayjs(banner.conditions.endDate),
                 bybClients: {
@@ -133,6 +135,17 @@ export default function Banner({ json, setJson }: BannerProps) {
                     label="siteIds"
                   >
                     <TextArea placeholder="예) EDGE186, EDGE205, EDGE428, EDGE13" />
+                  </Form.Item>
+                  <Form.Item
+                    name={[field.name, "conditions", "containsFreeApartment"]}
+                    label="containsFreeApartment"
+                  >
+                    <Radio.Group
+                      options={[
+                        { value: true, label: "포함" },
+                        { value: false, label: "미포함" },
+                      ]}
+                    />
                   </Form.Item>
                   <div style={{ display: "flex", gap: 10 }}>
                     <Form.Item

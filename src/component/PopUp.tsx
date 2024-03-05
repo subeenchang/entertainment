@@ -65,6 +65,8 @@ export default function PopUp({ json, setJson }: PopUpProps) {
                   popUp.conditions.siteIds.length > 0
                     ? popUp.conditions.siteIds.join(", ")
                     : "",
+                containsFreeApartment:
+                  popUp.conditions.containsFreeApartment ?? true,
                 startDate: dayjs(popUp.conditions.startDate),
                 endDate: dayjs(popUp.conditions.endDate),
                 bybClients: {
@@ -135,6 +137,17 @@ export default function PopUp({ json, setJson }: PopUpProps) {
                     label="siteIds"
                   >
                     <TextArea placeholder="예) EDGE186, EDGE205, EDGE428, EDGE13" />
+                  </Form.Item>
+                  <Form.Item
+                    name={[field.name, "conditions", "containsFreeApartment"]}
+                    label="containsFreeApartment"
+                  >
+                    <Radio.Group
+                      options={[
+                        { value: true, label: "포함" },
+                        { value: false, label: "미포함" },
+                      ]}
+                    />
                   </Form.Item>
                   <div style={{ display: "flex", gap: 10 }}>
                     <Form.Item
