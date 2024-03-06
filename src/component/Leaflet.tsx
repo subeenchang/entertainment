@@ -10,38 +10,38 @@ import {
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
 import { useEffect } from "react";
-import { IBanner, IBannerState } from "../type/Banner";
+import { ILeaflet, ILeafletState } from "../type/Leaflet";
 
-interface BannerProps {
+interface LeafletProps {
   json: string;
   setJson: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Banner({ json, setJson }: BannerProps) {
-  const [form] = Form.useForm<IBannerState>();
+export default function Leaflet({ json, setJson }: LeafletProps) {
+  const [form] = Form.useForm<ILeafletState>();
 
   const makeJson = () => {
-    const { banners } = form.getFieldsValue();
+    const { leaflets } = form.getFieldsValue();
     setJson(
       JSON.stringify({
-        banners: banners.map((banner) => ({
-          ...banner,
-          conditions: banner.conditions
+        leaflets: leaflets.map((leaflet) => ({
+          ...leaflet,
+          conditions: leaflet.conditions
             ? {
-                ...banner.conditions,
-                siteIds: banner.conditions.siteIds
-                  ? banner.conditions.siteIds.split(", ")
+                ...leaflet.conditions,
+                siteIds: leaflet.conditions.siteIds
+                  ? leaflet.conditions.siteIds.split(", ")
                   : [],
-                startDate: dayjs(banner.conditions.startDate).format(
+                startDate: dayjs(leaflet.conditions.startDate).format(
                   "YYYYMMDDHHmm",
                 ),
-                endDate: dayjs(banner.conditions.endDate).format(
+                endDate: dayjs(leaflet.conditions.endDate).format(
                   "YYYYMMDDHHmm",
                 ),
                 bybClients: {
-                  ...banner.conditions.bybClients,
-                  bybClientIds: banner.conditions.bybClients?.bybClientIds
-                    ? banner.conditions.bybClients?.bybClientIds.split(", ")
+                  ...leaflet.conditions.bybClients,
+                  bybClientIds: leaflet.conditions.bybClients?.bybClientIds
+                    ? leaflet.conditions.bybClients?.bybClientIds.split(", ")
                     : [],
                 },
               }
@@ -56,23 +56,23 @@ export default function Banner({ json, setJson }: BannerProps) {
       const jsonData = JSON.parse(json);
 
       form.setFieldsValue({
-        banners: jsonData.banners.map((banner: IBanner) => ({
-          ...banner,
-          conditions: banner.conditions
+        leaflets: jsonData.leaflets.map((leaflet: ILeaflet) => ({
+          ...leaflet,
+          conditions: leaflet.conditions
             ? {
-                ...banner.conditions,
+                ...leaflet.conditions,
                 siteIds:
-                  banner.conditions.siteIds.length > 0
-                    ? banner.conditions.siteIds.join(", ")
+                  leaflet.conditions.siteIds.length > 0
+                    ? leaflet.conditions.siteIds.join(", ")
                     : "",
                 containsFreeApartment:
-                  banner.conditions.containsFreeApartment ?? true,
-                startDate: dayjs(banner.conditions.startDate),
-                endDate: dayjs(banner.conditions.endDate),
+                  leaflet.conditions.containsFreeApartment ?? true,
+                startDate: dayjs(leaflet.conditions.startDate),
+                endDate: dayjs(leaflet.conditions.endDate),
                 bybClients: {
-                  ...banner.conditions.bybClients,
-                  bybClientIds: banner.conditions.bybClients?.bybClientIds
-                    ? banner.conditions.bybClients?.bybClientIds.join(", ")
+                  ...leaflet.conditions.bybClients,
+                  bybClientIds: leaflet.conditions.bybClients?.bybClientIds
+                    ? leaflet.conditions.bybClients?.bybClientIds.join(", ")
                     : "",
                 },
               }
@@ -85,7 +85,7 @@ export default function Banner({ json, setJson }: BannerProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 100 }}>
       <Form form={form}>
-        <Form.List name="banners">
+        <Form.List name="leaflets">
           {(fields, { add, remove }) => (
             <div
               style={{
@@ -108,23 +108,29 @@ export default function Banner({ json, setJson }: BannerProps) {
                   }}
                 >
                   <Typography.Text strong>
-                    배너 {field.name + 1}번
+                    광고 {field.name + 1}번
                   </Typography.Text>
                   <div style={{ display: "flex", gap: 10 }}>
-                    <Form.Item name={[field.name, "bannerId"]} label="bannerId">
-                      <Input placeholder="bannerId" />
-                    </Form.Item>
                     <Form.Item
-                      name={[field.name, "displayOrder"]}
-                      label="displayOrder"
+                      name={[field.name, "leafletId"]}
+                      label="leafletId"
                     >
-                      <Input placeholder="displayOrder" />
+                      <Input placeholder="leafletId" />
                     </Form.Item>
                     <Form.Item name={[field.name, "isShow"]} label="isShow">
                       <Radio.Group
                         options={[
                           { value: true, label: "공개" },
                           { value: false, label: "비공개" },
+                        ]}
+                      />
+                    </Form.Item>
+                    <Form.Item name={[field.name, "category"]} label="category">
+                      <Radio.Group
+                        options={[
+                          { value: "food", label: "food" },
+                          { value: "wellness", label: "wellness" },
+                          { value: "edu", label: "edu" },
                         ]}
                       />
                     </Form.Item>
@@ -199,15 +205,24 @@ export default function Banner({ json, setJson }: BannerProps) {
                     </Form.Item>
                   </div>
                   <Divider style={{ margin: 0 }} />
+                  <Form.Item name={[field.name, "title"]} label="title">
+                    <Input placeholder="title" />
+                  </Form.Item>
                   <div style={{ display: "flex", gap: 10 }}>
-                    <Form.Item name={[field.name, "href"]} label="href">
-                      <Input placeholder="href" style={{ width: "50vw" }} />
+                    <Form.Item
+                      name={[field.name, "kakaoLink"]}
+                      label="kakaoLink"
+                    >
+                      <Input
+                        placeholder="kakaoLink"
+                        style={{ width: "50vw" }}
+                      />
                     </Form.Item>
                     <Form.Item
-                      name={[field.name, "buttonTitle"]}
-                      label="buttonTitle"
+                      name={[field.name, "phoneNumber"]}
+                      label="phoneNumber"
                     >
-                      <Input placeholder="buttonTitle" />
+                      <Input placeholder="phoneNumber" />
                     </Form.Item>
                   </div>
                   <Button onClick={() => remove(field.name)}>삭제</Button>
