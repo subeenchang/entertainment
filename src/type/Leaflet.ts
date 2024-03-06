@@ -1,7 +1,12 @@
 import { ICondition } from "./Condition";
 
 export interface ILeafletState {
-  categories: { categoryId: string; color: string; description: string }[];
+  categories: {
+    categoryId: string;
+    color: string;
+    backgroundColor: string;
+    description: string;
+  }[];
   leaflets: IFormLeaflet[];
 }
 

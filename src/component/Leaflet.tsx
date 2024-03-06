@@ -103,6 +103,12 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                       <Input placeholder="color" />
                     </Form.Item>
                     <Form.Item
+                      name={[field.name, "backgroundColor"]}
+                      label="backgroundColor"
+                    >
+                      <Input placeholder="backgroundColor" />
+                    </Form.Item>
+                    <Form.Item
                       name={[field.name, "description"]}
                       label="description"
                     >
