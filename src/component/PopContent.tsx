@@ -45,7 +45,13 @@ export default function PopContent({ index }: PopContentProps) {
                     ]}
                   />
                 </Form.Item>
-                <Button onClick={() => remove(field2.name)}>삭제</Button>
+                <Button
+                  danger
+                  type="primary"
+                  onClick={() => remove(field2.name)}
+                >
+                  삭제
+                </Button>
               </div>
             </div>
           ))}

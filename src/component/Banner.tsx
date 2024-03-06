@@ -210,7 +210,13 @@ export default function Banner({ json, setJson }: BannerProps) {
                       <Input placeholder="buttonTitle" />
                     </Form.Item>
                   </div>
-                  <Button onClick={() => remove(field.name)}>삭제</Button>
+                  <Button
+                    danger
+                    type="primary"
+                    onClick={() => remove(field.name)}
+                  >
+                    삭제
+                  </Button>
                 </div>
               ))}
               <Button
@@ -231,7 +237,9 @@ export default function Banner({ json, setJson }: BannerProps) {
         </Form.List>
       </Form>
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-        <Button onClick={makeJson}>JSON 생성</Button>
+        <Button type="primary" onClick={makeJson}>
+          JSON 생성
+        </Button>
         <TextArea
           value={json}
           style={{ height: 400 }}
