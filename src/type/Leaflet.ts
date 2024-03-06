@@ -1,6 +1,7 @@
 import { ICondition } from "./Condition";
 
 export interface ILeafletState {
+  categories: { categoryId: string; color: string; description: string }[];
   leaflets: IFormLeaflet[];
 }
 
@@ -13,7 +14,7 @@ export interface IFormLeaflet {
   /*
     광고 카테고리
   */
-  category: string;
+  categoryId: string;
   /*
       광고 제목
     */

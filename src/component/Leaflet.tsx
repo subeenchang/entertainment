@@ -21,9 +21,10 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
   const [form] = Form.useForm<ILeafletState>();
 
   const makeJson = () => {
-    const { leaflets } = form.getFieldsValue();
+    const { categories, leaflets } = form.getFieldsValue();
     setJson(
       JSON.stringify({
+        categories,
         leaflets: leaflets.map((leaflet) => ({
           ...leaflet,
           conditions: leaflet.conditions
@@ -56,6 +57,7 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
       const jsonData = JSON.parse(json);
 
       form.setFieldsValue({
+        categories: jsonData.categories,
         leaflets: jsonData.leaflets.map((leaflet: ILeaflet) => ({
           ...leaflet,
           conditions: leaflet.conditions
@@ -85,6 +87,35 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 100 }}>
       <Form form={form}>
+        <div style={{ marginBottom: "20px" }}>
+          <Form.List name="categories">
+            {(fields, { add, remove }) => (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {fields.map((field) => (
+                  <div key={field.key} style={{ display: "flex", gap: 10 }}>
+                    <Form.Item
+                      name={[field.name, "categoryId"]}
+                      label="categoryId"
+                    >
+                      <Input placeholder="categoryId" />
+                    </Form.Item>
+                    <Form.Item name={[field.name, "color"]} label="color">
+                      <Input placeholder="color" />
+                    </Form.Item>
+                    <Form.Item
+                      name={[field.name, "description"]}
+                      label="description"
+                    >
+                      <Input placeholder="description" />
+                    </Form.Item>
+                    <Button onClick={() => remove(field.name)}>-</Button>
+                  </div>
+                ))}
+                <Button onClick={() => add()}>+</Button>
+              </div>
+            )}
+          </Form.List>
+        </div>
         <Form.List name="leaflets">
           {(fields, { add, remove }) => (
             <div
@@ -125,12 +156,15 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                         ]}
                       />
                     </Form.Item>
-                    <Form.Item name={[field.name, "category"]} label="category">
+                    <Form.Item
+                      name={[field.name, "categoryId"]}
+                      label="categoryId"
+                    >
                       <Radio.Group
                         options={[
-                          { value: "food", label: "food" },
-                          { value: "wellness", label: "wellness" },
-                          { value: "edu", label: "edu" },
+                          { value: "1", label: "food" },
+                          { value: "2", label: "wellness" },
+                          { value: "3", label: "edu" },
                         ]}
                       />
                     </Form.Item>
@@ -232,7 +266,10 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                 onClick={() =>
                   add({
                     isShow: true,
-                    conditions: { bybClients: { useBybClients: false } },
+                    conditions: {
+                      containsFreeApartment: true,
+                      bybClients: { useBybClients: false },
+                    },
                   })
                 }
               >

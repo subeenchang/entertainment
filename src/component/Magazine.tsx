@@ -215,6 +215,7 @@ export default function Magazine({ json, setJson }: MagazineProps) {
                   add({
                     isShow: true,
                     conditions: {
+                      containsFreeApartment: true,
                       bybClients: { useBybClients: false },
                     },
                   })

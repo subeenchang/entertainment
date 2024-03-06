@@ -213,7 +213,10 @@ export default function PopUp({ json, setJson }: PopUpProps) {
                 onClick={() =>
                   add({
                     isShow: true,
-                    conditions: { bybClients: { useBybClients: false } },
+                    conditions: {
+                      containsFreeApartment: true,
+                      bybClients: { useBybClients: false },
+                    },
                   })
                 }
               >

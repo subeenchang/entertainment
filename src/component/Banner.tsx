@@ -217,7 +217,10 @@ export default function Banner({ json, setJson }: BannerProps) {
                 onClick={() =>
                   add({
                     isShow: true,
-                    conditions: { bybClients: { useBybClients: false } },
+                    conditions: {
+                      containsFreeApartment: true,
+                      bybClients: { useBybClients: false },
+                    },
                   })
                 }
               >
