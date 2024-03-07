@@ -3,8 +3,7 @@ import { ICondition } from "./Condition";
 export interface ILeafletState {
   categories: {
     categoryId: string;
-    color: string;
-    backgroundColor: string;
+    categoryName: string;
     description: string;
   }[];
   leaflets: IFormLeaflet[];

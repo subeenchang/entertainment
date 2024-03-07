@@ -19,6 +19,7 @@ interface LeafletProps {
 
 export default function Leaflet({ json, setJson }: LeafletProps) {
   const [form] = Form.useForm<ILeafletState>();
+  const categories = Form.useWatch("categories", form);
 
   const makeJson = () => {
     const { categories, leaflets } = form.getFieldsValue();
@@ -99,14 +100,11 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                     >
                       <Input placeholder="categoryId" />
                     </Form.Item>
-                    <Form.Item name={[field.name, "color"]} label="color">
-                      <Input placeholder="color" />
-                    </Form.Item>
                     <Form.Item
-                      name={[field.name, "backgroundColor"]}
-                      label="backgroundColor"
+                      name={[field.name, "categoryName"]}
+                      label="categoryName"
                     >
-                      <Input placeholder="backgroundColor" />
+                      <Input placeholder="categoryName" />
                     </Form.Item>
                     <Form.Item
                       name={[field.name, "description"]}
@@ -173,11 +171,10 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                       label="categoryId"
                     >
                       <Radio.Group
-                        options={[
-                          { value: "1", label: "1" },
-                          { value: "2", label: "2" },
-                          { value: "3", label: "3" },
-                        ]}
+                        options={categories.map((category) => ({
+                          value: category.categoryId,
+                          label: category.categoryName,
+                        }))}
                       />
                     </Form.Item>
                   </div>
