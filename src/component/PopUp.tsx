@@ -47,6 +47,7 @@ export default function PopUp({ json, setJson }: PopUpProps) {
               }
             : undefined,
         })),
+        enabled: true,
       }),
     );
   };
@@ -78,6 +79,7 @@ export default function PopUp({ json, setJson }: PopUpProps) {
               }
             : undefined,
         })),
+        enabled: true,
       });
     }
   }, [form, json]);

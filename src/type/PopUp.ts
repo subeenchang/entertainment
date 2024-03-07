@@ -5,6 +5,7 @@ import { ICondition } from "src/type/Condition";
 // 팝업을 관리하는 메인 상태
 export interface IPopUpState {
   popUps: IFormPopUp[];
+  enabled: boolean;
 }
 
 // 광고 정보
