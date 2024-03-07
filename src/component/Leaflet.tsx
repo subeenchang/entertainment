@@ -174,9 +174,9 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                     >
                       <Radio.Group
                         options={[
-                          { value: "1", label: "food" },
-                          { value: "2", label: "wellness" },
-                          { value: "3", label: "edu" },
+                          { value: "1", label: "1" },
+                          { value: "2", label: "2" },
+                          { value: "3", label: "3" },
                         ]}
                       />
                     </Form.Item>
