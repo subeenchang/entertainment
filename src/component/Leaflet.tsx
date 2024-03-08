@@ -1,4 +1,12 @@
-import { Button, Divider, Form, Input, Radio, Typography } from "antd";
+import {
+  Button,
+  Collapse,
+  Divider,
+  Form,
+  Input,
+  Radio,
+  Typography,
+} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
 import { useEffect } from "react";
@@ -80,10 +88,13 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
   }, [form, json]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 100 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <Form form={form}>
-        <span style={{ fontWeight: 700, fontSize: 20 }}>카테고리 목록</span>
-        <CategoryList />
+        <Collapse
+          items={[
+            { key: "1", label: "카테고리 목록", children: <CategoryList /> },
+          ]}
+        />
         <div style={{ marginBottom: "20px" }} />
         <Form.List name="leaflets">
           {(fields, { add, remove }) => (
@@ -93,7 +104,7 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                 flexDirection: "column",
                 gap: 10,
                 overflow: "auto",
-                height: "80vh",
+                height: 540,
               }}
             >
               {fields.map((field) => (
@@ -130,7 +141,7 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                       label="category"
                     >
                       <Radio.Group
-                        options={categories.map((category) => ({
+                        options={categories?.map((category) => ({
                           value: category.categoryId,
                           label: category.categoryName,
                         }))}
@@ -174,6 +185,7 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
           )}
         </Form.List>
       </Form>
+      <Divider style={{ background: "#8294ba" }} />
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <Button type="primary" onClick={makeJson}>
           JSON 생성

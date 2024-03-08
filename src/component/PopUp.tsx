@@ -77,7 +77,7 @@ export default function PopUp({ json, setJson }: PopUpProps) {
   }, [form, json]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 100 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <Form form={form}>
         <Form.List name="popUps">
           {(fields, { add, remove }) => (
@@ -87,7 +87,7 @@ export default function PopUp({ json, setJson }: PopUpProps) {
                 flexDirection: "column",
                 gap: 10,
                 overflow: "auto",
-                height: "80vh",
+                height: 540,
               }}
             >
               {fields.map((field) => (
@@ -141,6 +141,7 @@ export default function PopUp({ json, setJson }: PopUpProps) {
           )}
         </Form.List>
       </Form>
+      <Divider style={{ background: "#8294ba" }} />
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <Button type="primary" onClick={makeJson}>
           JSON 생성

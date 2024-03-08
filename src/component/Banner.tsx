@@ -76,7 +76,7 @@ export default function Banner({ json, setJson }: BannerProps) {
   }, [form, json]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 100 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <Form form={form}>
         <Form.List name="banners">
           {(fields, { add, remove }) => (
@@ -86,7 +86,7 @@ export default function Banner({ json, setJson }: BannerProps) {
                 flexDirection: "column",
                 gap: 10,
                 overflow: "auto",
-                height: "80vh",
+                height: 540,
               }}
             >
               {fields.map((field) => (
@@ -150,6 +150,7 @@ export default function Banner({ json, setJson }: BannerProps) {
           )}
         </Form.List>
       </Form>
+      <Divider style={{ background: "#8294ba" }} />
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <Button type="primary" onClick={makeJson}>
           JSON 생성

@@ -134,18 +134,20 @@ function App() {
           ]}
         />
         <div style={{ display: "flex", gap: 40 }}>
-          {type === "POPUP" && (
-            <PopUp json={popUpJson} setJson={setPopUpJson} />
-          )}
-          {type === "BANNER" && (
-            <Banner json={bannerJson} setJson={setBannerJson} />
-          )}
-          {type === "MAGAZINE" && (
-            <Magazine json={magazineJson} setJson={setMagazineJson} />
-          )}
-          {type === "LEAFLET" && (
-            <Leaflet json={leafletJson} setJson={setLeafletJson} />
-          )}
+          <div style={{ width: 1200 }}>
+            {type === "POPUP" && (
+              <PopUp json={popUpJson} setJson={setPopUpJson} />
+            )}
+            {type === "BANNER" && (
+              <Banner json={bannerJson} setJson={setBannerJson} />
+            )}
+            {type === "MAGAZINE" && (
+              <Magazine json={magazineJson} setJson={setMagazineJson} />
+            )}
+            {type === "LEAFLET" && (
+              <Leaflet json={leafletJson} setJson={setLeafletJson} />
+            )}
+          </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <span style={{ fontWeight: 700 }}>전체 JSON</span>
             <TextArea
