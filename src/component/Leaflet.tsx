@@ -1,15 +1,9 @@
-import {
-  Button,
-  DatePicker,
-  Divider,
-  Form,
-  Input,
-  Radio,
-  Typography,
-} from "antd";
+import { Button, Divider, Form, Input, Radio, Typography } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
 import { useEffect } from "react";
+import CategoryList from "src/component/shared/CategoryList";
+import Conditions, { DEFAULT_VALUE } from "src/component/shared/Conditions";
 import { ILeaflet, ILeafletState } from "../type/Leaflet";
 
 interface LeafletProps {
@@ -88,44 +82,9 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 100 }}>
       <Form form={form}>
-        <div style={{ marginBottom: "20px" }}>
-          <Form.List name="categories">
-            {(fields, { add, remove }) => (
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                {fields.map((field) => (
-                  <div key={field.key} style={{ display: "flex", gap: 10 }}>
-                    <Form.Item
-                      name={[field.name, "categoryId"]}
-                      label="categoryId"
-                    >
-                      <Input placeholder="categoryId" />
-                    </Form.Item>
-                    <Form.Item
-                      name={[field.name, "categoryName"]}
-                      label="categoryName"
-                    >
-                      <Input placeholder="categoryName" />
-                    </Form.Item>
-                    <Form.Item
-                      name={[field.name, "description"]}
-                      label="description"
-                    >
-                      <Input placeholder="description" />
-                    </Form.Item>
-                    <Button
-                      danger
-                      type="primary"
-                      onClick={() => remove(field.name)}
-                    >
-                      -
-                    </Button>
-                  </div>
-                ))}
-                <Button onClick={() => add()}>+</Button>
-              </div>
-            )}
-          </Form.List>
-        </div>
+        <span style={{ fontWeight: 700, fontSize: 20 }}>카테고리 목록</span>
+        <CategoryList />
+        <div style={{ marginBottom: "20px" }} />
         <Form.List name="leaflets">
           {(fields, { add, remove }) => (
             <div
@@ -144,7 +103,7 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                     display: "flex",
                     flexDirection: "column",
                     gap: 10,
-                    border: "1px solid",
+                    border: "1px solid #007AFF",
                     padding: 10,
                   }}
                 >
@@ -168,7 +127,7 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                     </Form.Item>
                     <Form.Item
                       name={[field.name, "categoryId"]}
-                      label="categoryId"
+                      label="category"
                     >
                       <Radio.Group
                         options={categories.map((category) => ({
@@ -179,74 +138,7 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                     </Form.Item>
                   </div>
                   <Divider style={{ margin: 0 }} />
-                  <Form.Item
-                    name={[field.name, "conditions", "siteIds"]}
-                    label="siteIds"
-                  >
-                    <TextArea placeholder="예) EDGE186, EDGE205, EDGE428, EDGE13" />
-                  </Form.Item>
-                  <Form.Item
-                    name={[field.name, "conditions", "containsFreeApartment"]}
-                    label="containsFreeApartment"
-                  >
-                    <Radio.Group
-                      options={[
-                        { value: true, label: "포함" },
-                        { value: false, label: "미포함" },
-                      ]}
-                    />
-                  </Form.Item>
-                  <div style={{ display: "flex", gap: 10 }}>
-                    <Form.Item
-                      name={[field.name, "conditions", "startDate"]}
-                      label="startDate"
-                    >
-                      <DatePicker
-                        format="YYYY-MM-DD HH:mm"
-                        showTime
-                        placeholder="startDate"
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      name={[field.name, "conditions", "endDate"]}
-                      label="endDate"
-                    >
-                      <DatePicker
-                        format="YYYY-MM-DD HH:mm"
-                        showTime
-                        placeholder="endDate"
-                      />
-                    </Form.Item>
-                  </div>
-                  <div style={{ display: "flex", gap: 10 }}>
-                    <Form.Item
-                      name={[
-                        field.name,
-                        "conditions",
-                        "bybClients",
-                        "bybClientIds",
-                      ]}
-                      label="bybClientIds"
-                    >
-                      <Input placeholder="예) BYB, IS_DONGSEO" />
-                    </Form.Item>
-                    <Form.Item
-                      name={[
-                        field.name,
-                        "conditions",
-                        "bybClients",
-                        "useBybClients",
-                      ]}
-                      label="useBybClients"
-                    >
-                      <Radio.Group
-                        options={[
-                          { value: true, label: "사용" },
-                          { value: false, label: "미사용" },
-                        ]}
-                      />
-                    </Form.Item>
-                  </div>
+                  <Conditions index={field.name} />
                   <Divider style={{ margin: 0 }} />
                   <Form.Item name={[field.name, "title"]} label="title">
                     <Input placeholder="title" />
@@ -258,7 +150,7 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                     >
                       <Input
                         placeholder="kakaoLink"
-                        style={{ width: "50vw" }}
+                        style={{ width: "400px" }}
                       />
                     </Form.Item>
                     <Form.Item
@@ -277,19 +169,7 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                   </Button>
                 </div>
               ))}
-              <Button
-                onClick={() =>
-                  add({
-                    isShow: true,
-                    conditions: {
-                      containsFreeApartment: true,
-                      bybClients: { useBybClients: false },
-                    },
-                  })
-                }
-              >
-                추가
-              </Button>
+              <Button onClick={() => add(DEFAULT_VALUE)}>추가</Button>
             </div>
           )}
         </Form.List>
@@ -300,8 +180,9 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
         </Button>
         <TextArea
           value={json}
-          style={{ height: 400 }}
+          style={{ height: 200 }}
           onChange={(e) => setJson(e.target.value)}
+          readOnly
         />
       </div>
     </div>

@@ -1,17 +1,9 @@
-import {
-  Button,
-  DatePicker,
-  Divider,
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Typography,
-} from "antd";
+import { Button, Divider, Form, Input, Radio, Typography } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 import PopContent from "src/component/PopContent";
+import Conditions, { DEFAULT_VALUE } from "src/component/shared/Conditions";
 import { IPopUp, IPopUpState } from "src/type/PopUp";
 
 interface PopUpProps {
@@ -105,7 +97,7 @@ export default function PopUp({ json, setJson }: PopUpProps) {
                     display: "flex",
                     flexDirection: "column",
                     gap: 10,
-                    border: "1px solid",
+                    border: "1px solid #007AFF",
                     padding: 10,
                   }}
                 >
@@ -134,80 +126,7 @@ export default function PopUp({ json, setJson }: PopUpProps) {
                   <Divider style={{ margin: 0 }} />
                   <PopContent index={field.name} />
                   <Divider style={{ margin: 0 }} />
-                  <Form.Item
-                    name={[field.name, "conditions", "siteIds"]}
-                    label="siteIds"
-                  >
-                    <TextArea placeholder="예) EDGE186, EDGE205, EDGE428, EDGE13" />
-                  </Form.Item>
-                  <Form.Item
-                    name={[field.name, "conditions", "containsFreeApartment"]}
-                    label="containsFreeApartment"
-                  >
-                    <Radio.Group
-                      options={[
-                        { value: true, label: "포함" },
-                        { value: false, label: "미포함" },
-                      ]}
-                    />
-                  </Form.Item>
-                  <div style={{ display: "flex", gap: 10 }}>
-                    <Form.Item
-                      name={[field.name, "conditions", "startDate"]}
-                      label="startDate"
-                    >
-                      <DatePicker
-                        format="YYYY-MM-DD HH:mm"
-                        showTime
-                        placeholder="startDate"
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      name={[field.name, "conditions", "endDate"]}
-                      label="endDate"
-                    >
-                      <DatePicker
-                        format="YYYY-MM-DD HH:mm"
-                        showTime
-                        placeholder="endDate"
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      name={[field.name, "conditions", "daysOfNotShow"]}
-                      label="daysOfNotShow"
-                    >
-                      <InputNumber placeholder="daysOfNotShow" />
-                    </Form.Item>
-                  </div>
-                  <div style={{ display: "flex", gap: 10 }}>
-                    <Form.Item
-                      name={[
-                        field.name,
-                        "conditions",
-                        "bybClients",
-                        "bybClientIds",
-                      ]}
-                      label="bybClientIds"
-                    >
-                      <Input placeholder="예) BYB, IS_DONGSEO" />
-                    </Form.Item>
-                    <Form.Item
-                      name={[
-                        field.name,
-                        "conditions",
-                        "bybClients",
-                        "useBybClients",
-                      ]}
-                      label="useBybClients"
-                    >
-                      <Radio.Group
-                        options={[
-                          { value: true, label: "사용" },
-                          { value: false, label: "미사용" },
-                        ]}
-                      />
-                    </Form.Item>
-                  </div>
+                  <Conditions index={field.name} />
                   <Button
                     danger
                     type="primary"
@@ -217,19 +136,7 @@ export default function PopUp({ json, setJson }: PopUpProps) {
                   </Button>
                 </div>
               ))}
-              <Button
-                onClick={() =>
-                  add({
-                    isShow: true,
-                    conditions: {
-                      containsFreeApartment: true,
-                      bybClients: { useBybClients: false },
-                    },
-                  })
-                }
-              >
-                추가
-              </Button>
+              <Button onClick={() => add(DEFAULT_VALUE)}>추가</Button>
             </div>
           )}
         </Form.List>
@@ -240,8 +147,9 @@ export default function PopUp({ json, setJson }: PopUpProps) {
         </Button>
         <TextArea
           value={json}
-          style={{ height: 400 }}
+          style={{ height: 200 }}
           onChange={(e) => setJson(e.target.value)}
+          readOnly
         />
       </div>
     </div>
