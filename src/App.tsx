@@ -80,6 +80,7 @@ function App() {
         ),
       );
     } catch {
+      message.error("잘못된 JSON 형식입니다.");
       setJson("");
     }
   };

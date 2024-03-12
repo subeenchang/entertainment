@@ -24,9 +24,9 @@ export interface IFormLeaflet {
     */
   title: string;
   /*
-      카카오톡 링크
+     링크
     */
-  kakaoLink?: string;
+  link?: string;
   /*
       전화번호
     */

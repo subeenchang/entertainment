@@ -155,14 +155,8 @@ export default function Leaflet({ json, setJson }: LeafletProps) {
                     <Input placeholder="title" />
                   </Form.Item>
                   <div style={{ display: "flex", gap: 10 }}>
-                    <Form.Item
-                      name={[field.name, "kakaoLink"]}
-                      label="kakaoLink"
-                    >
-                      <Input
-                        placeholder="kakaoLink"
-                        style={{ width: "400px" }}
-                      />
+                    <Form.Item name={[field.name, "link"]} label="link">
+                      <Input placeholder="link" style={{ width: "400px" }} />
                     </Form.Item>
                     <Form.Item
                       name={[field.name, "phoneNumber"]}
