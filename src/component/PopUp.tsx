@@ -136,7 +136,13 @@ export default function PopUp({ json, setJson }: PopUpProps) {
                   </Button>
                 </div>
               ))}
-              <Button onClick={() => add(DEFAULT_VALUE)}>추가</Button>
+              <Button
+                onClick={() =>
+                  add({ ...DEFAULT_VALUE, contents: [{ isShow: true }] })
+                }
+              >
+                추가
+              </Button>
             </div>
           )}
         </Form.List>
